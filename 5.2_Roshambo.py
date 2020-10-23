@@ -11,13 +11,47 @@ When the user quits print a win/loss record
 
 '''
 
+import random
 
+game = True
 
-
-
-
-
-
-
-
-
+while game:
+    user = random.randrange(1,4)
+    computer = random.randrange(1,4)
+    uscore = 0
+    cscore = 0
+    nilscore = 0
+    if user == 1:
+        print("User: Rock")
+    elif user == 2:
+        print("User: Paper")
+    else:
+        print("User: Scissors")
+    if computer == 1:
+        print("Computer: Rock")
+    elif computer == 2:
+        print("Computer: Paper")
+    else:
+        print("Computer: Scissors")
+    if user == computer:
+        print("Tie")
+        nilscore += 1
+    elif user == 1 and computer == 2:
+        print("You Lost")
+        cscore += 1
+    elif user == 1 and computer == 3:
+        print("You Win!")
+        uscore += 1
+    elif user == 2 and computer == 1:
+        print("You Win!")
+        uscore += 1
+    elif user == 2 and computer == 3:
+        print("You Lose")
+        cscore += 1
+    elif user == 3 and computer == 1:
+        print("You Lose")
+        cscore += 1
+    elif user == 3 and computer == 2:
+        print("You Win!")
+    else:
+        print("come again?")
