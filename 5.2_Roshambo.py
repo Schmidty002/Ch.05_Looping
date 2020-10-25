@@ -29,6 +29,7 @@ while game:
         user = int(user)
     else:
         print("Invalid Answer\n")
+        continue1
     if user == 1:                           #Sets user's choice
         print("User: Rock")
     elif user == 2:
