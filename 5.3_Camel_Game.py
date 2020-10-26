@@ -7,23 +7,24 @@ The pseudo-code for how to code this game is in Chapter 5 of the Python Jedi boo
 import random
 
 game = True
-
+print("regular color")
 print("You are a pilot exploring space.")
 print("A group of marauders has begun to pursue you after you encroached on their territory.")
+print("They managed to nick your hull, and you are leaking oxygen.")
 print("The warp gate that leads to federation space is 200,000 km away.")
-print("Reach the gate before running out of O2, blowing your engines, or being overtaken by the marauders.")
+print("Reach the gate before running out of oxygen, blowing your engines, or being overtaken by the marauders.")
 print("Fly well.  No barrel rolls.")
 print()
 
 udis = 0
 o2 = 0
-cannisters = 6
+canisters = 2
 enginteg = 0
 mdis = -10000
 
 while game:
     print("Enter Command")
-    print("[1] Swap O2 cannister")
+    print("[1] Swap oxygen canister")
     print("[2] Moderate engine power")
     print("[3] Full engine power")
     print("[4] Cut engines")
@@ -44,16 +45,16 @@ while game:
             continue
 
     elif command == "5":
-        print("Distance to warp gate:",200000-mdis)
-        print("O2 cannisters remaining:",cannisters)
-        print("Distance from pursuers:",udis-mdis)
+        print("Distance to warp gate:",300000-mdis,"km")
+        print("Oxygen canisters remaining:",canisters)
+        print("Distance from pursuers:",udis-mdis,"km")
         continue
 
     elif command == "4":
         enginteg = 0
         print("Your engines have cooled.")
         print()
-        mdis += random.randrange(7000,14001)
+        mdis += random.randrange(7000,12001)
 
     elif command == "3":
         move = random.randrange(10000,14001)
@@ -62,7 +63,7 @@ while game:
         print()
         o2 += 1
         enginteg += random.randrange(1,4)
-        mdis += random.randrange(7000,14001)
+        mdis += random.randrange(7000,12001)
 
     elif command == "2":
         move = random.randrange(5000,12001)
@@ -71,18 +72,18 @@ while game:
         print()
         o2 += 1
         enginteg += 1
-        mdis += random.randrange(7000,14001)
+        mdis += random.randrange(7000,12001)
 
     elif command == "1":
-        if cannisters > 0:
-            cannisters -= 1
+        if canisters > 0:
+            canisters -= 1
             o2 = 0
         else:
-            print("You are out of cannisters.")
+            print("\033[0;31;48m" + "You are out of canisters." + "\033[0;38;48m")
             print()
 
     if o2 > 4 and o2 <= 6:
-        print("O2 supply low")
+        print("\033[0;31;48m" + "Oxygen supply low" + "\033[0;38;48m")
         print()
     elif o2 > 6:
         print("You suffocated.")
@@ -91,7 +92,7 @@ while game:
         continue
 
     if enginteg > 5 and enginteg <= 8:
-        print("Your engines are beginning to overheat.")
+        print("\033[0;32;48m" + "Your engines are beginning to overheat." + "\033[0;38;48m")
         print()
     elif enginteg > 8:
         print("Your engines exploded.")
@@ -101,7 +102,7 @@ while game:
         game = False
         continue
 
-    if udis >= 200000:
+    if udis >= 300000:
         print("You have safely arrived in federation space.")
         print("Congratulations on a successful voyage!")
         game = False
@@ -123,5 +124,5 @@ while game:
         print("Engines have been cooled.")
         print()
         o2 = 0
-        cannisters = 6
+        canisters = 2
         enginteg = 0
