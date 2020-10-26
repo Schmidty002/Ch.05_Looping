@@ -7,7 +7,6 @@ The pseudo-code for how to code this game is in Chapter 5 of the Python Jedi boo
 import random
 
 game = True
-print("regular color")
 print("You are a pilot exploring space.")
 print("A group of marauders has begun to pursue you after you encroached on their territory.")
 print("They managed to nick your hull, and you are leaking oxygen.")
