@@ -8,7 +8,7 @@ COIN TOSS PROGRAM
 '''
 
 import random
-global heads,tails
+
 heads = 0
 tails = 0
 for i in range(50):
