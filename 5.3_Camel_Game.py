@@ -273,9 +273,13 @@ while game:
         if uhp <= 0:
             print("Glancing at the side of your monitor, you see a picture of you sitting with you two children.")
             print("Tommy is 7, and last you saw him he was building a model spaceship,")
-            print("so he could be just like [insert parental title affiliated with user's gender]")
-            print("Emma is 12.  She ")
-
+            print("so he could be just like [insert parental title affiliated with user's gender].")
+            print("Emma is 12.  She wouldn't talk to you before you left, because she didn't want you to go.")
+            print("These thoughts are the last things that go through your mind before your vision fades to blinding")
+            print("white, your body engulfed in searing pain, and then there is cold, dark, nothing.")
+            print("You have died.")
+            game = False
+            continue
 
 if not win:
     print("\033[31m" + "\nGAME OVER" + "\033[0m")
