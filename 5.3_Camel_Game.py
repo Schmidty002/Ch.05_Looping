@@ -18,23 +18,23 @@ print("l to view additional commands.")
 print("Fly well.  No barrel rolls.")
 print()
 
-udis = 0                            # variables for supplies and distance
-o2 = 7
-canisters = 2
-enginteg = 9
-mdis = -10000
-repairs = False
-mar = True
-charges = 10
-win = False
-battle = False
-uhp = 10
-ushield = 10
-mhp = 30
-ushieldbroke = False
-udefenseup = False
-
 while not done:
+
+    udis = 0                            # variables for supplies and distance
+    o2 = 7
+    canisters = 2
+    enginteg = 9
+    mdis = -10000
+    repairs = False
+    mar = True
+    charges = 10
+    win = False
+    battle = False
+    uhp = 10
+    ushield = 10
+    mhp = 30
+    ushieldbroke = False
+    udefenseup = False
 
     while game:
 
@@ -91,7 +91,7 @@ while not done:
                     if mar:
                         if charges >= 1:
                             if mdis < 15000:
-                                if random.randrange(0,2) == 1:
+                                if random.randrange(0, 2) == 1:
                                     print("You destroyed your pursuers.\n")
                                     mar = False
                                     charges -= 1
@@ -238,32 +238,32 @@ while not done:
             command = input("Enter a command: ")
 
             if command == "1":                              # user cannon attack
-                print("User used cannons!")
-                if random.randint(0,10) > 7:
-                    print("Foe Marauders avoided the attack!")
+                print("User used cannons!\n")
+                if random.randint(0, 10) > 7:
+                    print("Foe Marauders avoided the attack!\n")
                 else:
-                    damage = random.randint(2,6)
-                    critroll = random.randint(0,20)
+                    damage = random.randint(2, 6)
+                    critroll = random.randint(0, 20)
                     if critroll == 20:
-                        print("A critical hit!")
+                        print("A critical hit!\n")
                         damage *= 2
                         mhp -= damage
-                        print("Foe Marauders took,", damage, "damage!")
+                        print("Foe Marauders took", damage, "damage!\n")
                     else:
                         mhp -= damage
-                        print("Foe Marauders took,", damage, "damage!")
+                        print("Foe Marauders took", damage, "damage!\n")
 
             elif command == "2":                                # user shield boosts
-                print("User used shield!")
+                print("User used shield!\n")
                 if ushieldbroke:
-                    print("\033[32m" + "[Error]" + "\033[0m", "Shields offline")
+                    print("\033[32m" + "[Error]" + "\033[0m", "Shields offline\n")
                     continue
                 else:
                     udefenseup = True
 
             elif command == "3":                            # disobedience will be punished
-                print ("You exploded in a fiery column of death.")
-                print("I told you no barrel rolls.")
+                print("You exploded in a fiery column of death.")
+                print("I told you no barrel rolls.\n")
                 game = False
                 continue
 
@@ -271,29 +271,37 @@ while not done:
                 print("HP: ", uhp, "/10", sep="")
                 print("Shields: ", ushield, "/10", sep="")
                 print("Enemy HP: ", mhp, "/30", sep="")
+                print()
                 continue
 
             elif command == "5":                                    # attempts escape from battle
                 print("You tried to run away.")
-                if random.randrange(0,10) > 7:
+                print()
+                if random.randrange(0, 10) > 7:
                     print("Got away safely!")
+                    print()
                     battle = False
                     udis += 1000
                     continue
                 else:
                     print("Can't escape!")
+                    print()
 
             else:                                                   # Jake-proofing
                 print("[Command Invalid]")
+                print()
                 continue
 
             if mhp <= 0:                                            # tests for signs of life
                 mar = False
+                battle = False
+                mdis = 0
 
             if mar:
-                print("Foe Marauders used cannons!")                    # enemy cannon attack
+                print("Foe Marauders used cannons!")                # enemy cannon attack
+                print()
                 if random.randint(0, 10) > 3:
-                    damage = random.randint(2,5)
+                    damage = random.randint(2, 5)
                     if udefenseup:
                         damage //= 2
                         udefenseup = False
@@ -303,58 +311,55 @@ while not done:
                                 ushield = 0
                                 uhp -= damage
                                 print("Your shields were destroyed!")
+                                print()
                                 ushieldbroke = True
                                 if damage > 0:
                                     print("You took", damage, "damage!")
+                                    print()
                             else:
                                 ushield -= damage
                                 print("Your shields took", damage, "damage!")
+                                print()
                     else:
                         uhp -= damage
                         print("You took", damage, "damage!")
+                        print()
                 else:
                     print("Foe Marauders' attack missed!")
+                    print()
             else:
                 print("Foe Marauders were defeated!")
+                print()
+                continue
 
             if uhp <= 0:                                        # death note
                 print("Glancing at the side of your monitor, you see a picture of you sitting with you two children.")
                 print("Tommy is 7, and last you saw him he was building a model spaceship,")
                 print("so he could be just like [insert parental title affiliated with user's gender].")
+                print()
                 print("Emma is 12.  She wouldn't talk to you before you left, because she didn't want you to go.")
-                print("These thoughts are the last things that go through your mind before your vision fades to blinding")
-                print("white, your body engulfed in searing pain, and then there is cold, dark, nothing.")
+                print("These thoughts are the last things that go through your mind before your vision fades to")
+                print("blinding white, your body engulfed in searing pain, and then there is cold, dark, nothing.")
+                print()
                 print("You have died.")
                 game = False
                 continue
 
     if not win:
         print("\033[31m" + "\nGAME OVER" + "\033[0m")
+        print()
 
     print("Would you like to play again?")
     print("[Y] or [N]")
     command = input().lower()
     if command == "y":
         game = True
-        udis = 0  # variables for supplies and distance
-        o2 = 7
-        canisters = 2
-        enginteg = 9
-        mdis = -10000
-        repairs = False
-        mar = True
-        charges = 10
-        win = False
-        battle = False
-        uhp = 10
-        ushield = 10
-        mhp = 30
-        ushieldbroke = False
-        udefenseup = False
         continue
+
     elif command == "n":
         done = True
         continue
+
     else:
         print("[Command invalid]")
         continue
