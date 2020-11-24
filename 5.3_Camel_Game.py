@@ -14,7 +14,7 @@ print("A group of marauders has begun to pursue you after you encroached on thei
 print("They managed to nick your hull, and several systems were damaged.")
 print("The warp gate that leads to federation space is 300,000 km away.")
 print("Reach the gate before running out of oxygen, blowing your engines, or being overtaken by the marauders.")
-print("l to view additional commands.")
+print("a to view additional commands.")
 print("Fly well.  No barrel rolls.")
 print()
 
@@ -35,6 +35,8 @@ while not done:
     mhp = 30
     ushieldbroke = False
     udefenseup = False
+    misct = 0
+    licks = 0
 
     while game:
 
@@ -52,11 +54,21 @@ while not done:
             command = input("Enter a command: ")
             print()
 
-            if command == "l":
+            if command == "a":
                 print("- - -")
+                print("[c] Make coffee")
+                print("[f] Flip a coin")
+                print("[i] Invert artificial gravity")
+                print("[l] Lick tootsie pop")
+                print("[o] Organize rock collection")
                 print("[r] Repair ship")
+                print("[u] Usurp governmental authority")
+                print("[x] Xylophone soundtrack")
+                print()
+                command = input("Enter a command: ")
+                print()
 
-            elif command == "r":
+            if command == "r":
                 if not repairs:
                     repairs = True
                     print("Repairs complete\n")
@@ -165,6 +177,60 @@ while not done:
                 else:
                     print("\033[31m" + "You are out of canisters." + "\033[0m")
                     print()
+                    continue
+
+            elif command == "c":                                # coffee
+                print("You don't have a coffee machine.")
+                print()
+                continue
+
+            elif command == "f":                        # flips a coin
+                toss = random.randint(0, 2)
+                if toss == 1:
+                    print("Heads!")
+                    print()
+                else:
+                    print("Tails!")
+                    print()
+                continue
+
+            elif command == "i":                                # sorry, it's jake-proofed
+                print("[Error] Inversion controls locked")
+                print()
+                continue
+
+            elif command == "l":                # How many does it take
+                if licks == 0:
+                    print("`LICK`")
+                    print("a-one")
+                    licks += 1
+                elif licks == 1:
+                    print("`LICK`")
+                    print("a-two")
+                    licks += 1
+                elif licks == 2:
+                    print("`LICK`")
+                    print("a-three")
+                    print("`CRUNCH`")
+                    licks = 0
+                print()
+                continue
+
+            elif command == "o":                    # happy little family
+                print("`happy geologist noises`")
+                print()
+                continue
+
+            elif command == "u":                # I was short on ideas
+                print("Vive la revolution!")
+                print("`nibbles baguette`")
+                print()
+                continue
+
+            elif command == "x":                # what starts with x and is funny?  no clue, so you get this.
+                print("`xylophone noises`")
+                print()
+                continue
 
             else:                                                                   # handles non-number inputs
                 print("[Command Invalid]\n")
@@ -193,6 +259,7 @@ while not done:
             if udis >= 300000:                                              # tests for finished voyage
                 print("You have safely arrived in federation space.")
                 print("Congratulations on a successful voyage!")
+                print()
                 game = False
                 win = True
                 continue
@@ -236,6 +303,7 @@ while not done:
             print("[5] Attempt escape")
             print()
             command = input("Enter a command: ")
+            print()
 
             if command == "1":                              # user cannon attack
                 print("User used cannons!\n")
@@ -302,10 +370,10 @@ while not done:
                 print()
                 if random.randint(0, 10) > 3:
                     damage = random.randint(2, 5)
-                    if udefenseup:
+                    if udefenseup:                          # halves enemy damage if defense is up
                         damage //= 2
                         udefenseup = False
-                    if not ushieldbroke:
+                    if not ushieldbroke:                                # damages shields
                             if damage >= ushield and not ushieldbroke:
                                 damage -= ushield
                                 ushield = 0
@@ -313,6 +381,7 @@ while not done:
                                 print("Your shields were destroyed!")
                                 print()
                                 ushieldbroke = True
+                                misct = 0
                                 if damage > 0:
                                     print("You took", damage, "damage!")
                                     print()
@@ -320,14 +389,26 @@ while not done:
                                 ushield -= damage
                                 print("Your shields took", damage, "damage!")
                                 print()
-                    else:
+                                misct = 0
+                    else:                                           # damages ship
                         uhp -= damage
                         print("You took", damage, "damage!")
                         print()
-                else:
+                else:                                               # handles failed enemy attack
                     print("Foe Marauders' attack missed!")
                     print()
-            else:
+                    misct += 1
+
+                if misct >= 2:                      # partially regenerates shields
+                    if ushield < 10:
+                        print("Your shields have partially recharged!")
+                        print()
+                        ushield += 3
+                        misct = 0
+                        if ushield > 10:
+                            ushield = 10
+
+            else:                                           # ends fight
                 print("Foe Marauders were defeated!")
                 print()
                 continue
@@ -345,21 +426,21 @@ while not done:
                 game = False
                 continue
 
-    if not win:
+    if not win:                                             # game loss text
         print("\033[31m" + "\nGAME OVER" + "\033[0m")
         print()
 
-    print("Would you like to play again?")
+    print("Would you like to play again?")              # play again?
     print("[Y] or [N]")
     command = input().lower()
-    if command == "y":
+    if command == "y":              # starts a new game
         game = True
         continue
 
-    elif command == "n":
+    elif command == "n":            # quits game
         done = True
         continue
 
-    else:
+    else:                               # handles invalid input
         print("[Command invalid]")
         continue
